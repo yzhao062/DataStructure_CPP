@@ -1,41 +1,50 @@
+//
+//  main.cpp
+//  HashTable_Array
+//
+//  Created by Yue Zhao on 11/9/15.
+//  Copyright © 2015 Yue Zhao. All rights reserved.
+//
+//  the main purpose of this program is to show the comparision
+//  among different collision algorithm
 /****************************************************************************
-
  date     : Nov 29 2011,
  coplier  : GCC
- software : Xcode 4.2 & Codeblocks 10.5
+ software : Xcode 7.1
  Author   : Yue Zhao
 
- description: Implement a hash table using an array that contains 1009 (prime) elements. 
+ description: Implement a hash table using an array that contains prime(by default 811) elements.
               each element contains only an integer, and the integer is also the key for this element. 
-              Also, allow the user to input (i.e., insert) the numbers to the hash table. 
-              the program will stop in part 1 when the load ratio is exceeded. 
+              The hashtable is constructed manually or randomly.
+              That is, the user could insert the numbers to the hash table.
+              
+              The program will stop in part 1 when the load ratio is exceeded.
               Use linear probing, double hash, quadratic hash and seperate chaining 
               as the collision-resolution scheme.
 
-              Then analyze the efficiency through comparing the different times of comparisions of different strategies.
+              Then analyze the efficiency through comparing the different times 
+              of comparisions of different strategies.
 
- ***************************************************************************/
+ ****************************************************************************/
 
-#include "Hash.cpp" // the head file
+#include "HashStruc.h" // the header file of hash function
 
 int main()
 {
-  Hash table; // create a new table
+  Hash hashtable(811,0.8); // create a new table
 
-  int answer=0;
-  cout<<"\nWhat is the desired decimal value for load ratio?\n";
-
-  cin>>table.desiredLoad;
+  int menuChoice = 0;
+    
   cout<<"Enter keys manually or randomly?\n1: Manually\n2: Randomly\n";
-  while(answer!=1 && answer!=2)
+  while(menuChoice!=1 && menuChoice!=2)
   {
-	  cin>>answer;
+	  cin>>menuChoice;
   }
-  if(answer==1)
-		table.manualCreate();
-  else  table.randomCreate();
+  if(menuChoice==1)
+		hashtable.manualCreate();
+  else  hashtable.randomCreate();
 
-  while(answer>0 && answer<6)
+  while(menuChoice>0 && menuChoice<6)
     {
       cout<<"\nWhat do you want to do?\n"
 	  <<"1: Display Linear Hashing Table\n"
@@ -44,24 +53,24 @@ int main()
 	  <<"4: Display Separate Chaining Hashing Table\n"
 	  <<"5: Display Statiscs\n"
 	  <<"6: End\n";
-      cin>>answer;
-      switch(answer)
+      cin>>menuChoice;
+      switch(menuChoice)
 	{
 	case 1:
-	  table.displayLinear();
+	  hashtable.displayLinear();
 	  break;
 	case 2:
-	  table.displayDouble();
+	  hashtable.displayDouble();
 	  break;
 	case 3:
-	  table.displayQuadratic();
+	  hashtable.displayQuadratic();
 	  break;
 	case 4:
-	  table.displaySeparate();
+	  hashtable.displaySeparate();
 	  break;
 	case 5:
-	  table.findStatistics();
-	  table.displayStatistics();
+	  hashtable.findStatistics();
+	  hashtable.displayStatistics();
 	  break;
 	}
     }
